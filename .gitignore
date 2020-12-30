@@ -1,11 +1,15 @@
 /Papers
 /Dataset
+/Extras
 /GenLabel/.vscode
 /GenLabel/a.out
 /GenGraph/a.out
-/GenGraph/a.txt
 /GenGraph/scene.json
 /GenGraph/input.db
+/GenGraph/graphToImage.db
+/GenGraph/object1.json
+/GenGraph/relation1.json
 /VEO/a.out
 /VEO/simIndex_gte_60.txt
 /VEO/simIndex.txt
+/VEO/sortedResults.txt

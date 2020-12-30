@@ -11,6 +11,7 @@
 	
 	ifstream inputSceneGraph;
 	ofstream outputGraph;
+	ofstream graphToImage;
 	long long graphId;
 	Value objectLabel;
 	Value edgeLabel;
@@ -40,39 +41,62 @@
 		reader.parse(inputGraph,sceneGraph);
 		inputGraph.close();
 
-		map<long long,int> mp;
-		outputGraph<<"t # "<<graphId<<endl;
-		graphId++;
-
 		Value objects = sceneGraph["objects"];
-		vector<pair<int,int>> attributeEdges;
+		int numDistinctVertex = 0;
+		map<int,int> mpp;
+		for(int i=0;i<objects.size();i++){
+			long long objectId = objects[i]["object_id"].asInt64();
+			if(objects[i]["synsets"].size()==0){
+				continue;
+			}
+			string synset = objects[i]["synsets"][0].asString();
+			if(objectLabel[synset].asInt64()==0){
+				continue;
+			}
+
+			int objClass = objectLabel[synset].asInt64();
+			if(mpp[objClass]==0){
+				mpp[objClass] = 1;
+				numDistinctVertex++;
+			}
+		}
+
+		if(numDistinctVertex < 5){
+			return;
+		}
+
+		outputGraph<<"t # "<<graphId<<endl;
+		map<long long,int> mp;
+
 		int offset = 0;
 		for(int i=0;i<objects.size();i++){
 			long long objectId = objects[i]["object_id"].asInt64();
-			string synset = objects[i]["synsets"][0].asString();
-			mp[objectId] = i+offset;
-			outputGraph<<"v "<<i+offset<<" "<<objectLabel[synset].asInt64()<<endl;
-			Value attributes = objects[i]["attributes"];
-			int base = i+offset;
-			for(int j=0;j<attributes.size();j++){
-				offset++;
-				string attrName = attributes[j].asString();
-				outputGraph<<"v "<<i+offset<<" "<<attributeLabel[attrName].asInt64()<<endl;
-				attributeEdges.push_back({base,i+offset});
+			if(objects[i]["synsets"].size()==0){
+				offset += 1;
+				continue;
 			}
+			string synset = objects[i]["synsets"][0].asString();
+			if(objectLabel[synset].asInt64()==0){
+				offset += 1;
+				continue;
+			}
+			mp[objectId] = i-offset+1;
+			outputGraph<<"v "<<i-offset<<" "<<objectLabel[synset].asInt64()<<endl;
 		}
 
 		Value edges = sceneGraph["relationships"];
 		for(int i=0;i<edges.size();i++){
 			long long node1 = edges[i]["object_id"].asInt64();
 			long long node2 = edges[i]["subject_id"].asInt64();
+			if(edges[i]["synsets"].size()==0 || mp[node1]==0 || mp[node2]==0){
+				continue;
+			}
 			string synset = edges[i]["synsets"][0].asString();
-			outputGraph<<"e "<<mp[node1]<<" "<<mp[node2]<<" "<<edgeLabel[synset].asInt64()<<endl;
+			outputGraph<<"e "<<mp[node1]-1<<" "<<mp[node2]-1<<" "<<edgeLabel[synset].asInt64()<<endl;
 		}
 
-		for(int i=0;i<attributeEdges.size();i++){
-			outputGraph<<"e "<<attributeEdges[i].first<<" "<<attributeEdges[i].second<<" 0"<<endl;
-		}
+		graphToImage<<graphId<<" "<<sceneGraph["image_id"]<<endl;
+		graphId++;
 	}
 
 	int main(){
@@ -89,6 +113,7 @@
 
 		inputSceneGraph.open("../Dataset/scene_graphs.json");
 		outputGraph.open("input.db");
+		graphToImage.open("graphToImage.db");
 		graphId = 1;
 		char c;
 		while(inputSceneGraph>>noskipws>>c){
@@ -98,6 +123,7 @@
 		}
 		inputSceneGraph.close();
 		outputGraph.close();
+		graphToImage.close();
 		return 0;
 	}
 

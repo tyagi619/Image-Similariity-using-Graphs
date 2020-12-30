@@ -6,6 +6,7 @@
 using namespace std;
 
 #define endl "\n"
+#define NUM_GRAPH 89946
 
 int intersect(vector<int> a,vector<int> b){
     int n = a.size();
@@ -30,8 +31,8 @@ int main(){
     int t;
     char c;
     int u,v,e,idx;
-    vector<vector<int>> gVertex(108182);
-    vector<vector<int>> gEdges(108182); 
+    vector<vector<int>> gVertex(NUM_GRAPH + 1);
+    vector<vector<int>> gEdges(NUM_GRAPH + 1); 
     fp.open("../GenGraph/input.db");
     while(fp>>c){
         switch(c){
@@ -50,8 +51,8 @@ int main(){
         }
     }
     fp.close();
-    sort(gVertex[108181].begin(),gVertex[108181].end());
-    sort(gVertex[108181].begin(),gVertex[108181].end());
+    sort(gVertex[NUM_GRAPH].begin(),gVertex[NUM_GRAPH].end());
+    sort(gVertex[NUM_GRAPH].begin(),gVertex[NUM_GRAPH].end());
     
     cout<<"Data load complete\n\n";
 
@@ -59,18 +60,23 @@ int main(){
     ofstream ofp1("simIndex_gte_60.txt");
     ofp<<fixed<<setprecision(3);
     ofp1<<fixed<<setprecision(3);
-    for(int i=0;i<108182;i++){
+    for(int i=0;i<NUM_GRAPH;i++){
         
         cout<<(i+1)<<"\r";
         cout.flush();
         
-        for(int j=i+1;j<108182;j++){
+        for(int j=i+1;j<NUM_GRAPH;j++){
             ofp<<i+1<<" : "<<j+1<<" --- ";
             int tot = gVertex[i+1].size() + gVertex[j+1].size() + gEdges[i+1].size() + gEdges[j+1].size();
             int vertexIntsct = intersect(gVertex[i+1],gVertex[j+1]);
             int edgeIntsct = intersect(gEdges[i+1],gEdges[j+1]);
             long double sim = (long double)(2)*(long double)(vertexIntsct+edgeIntsct);
-            sim /= (tot);
+            if(tot==0){
+            	sim = 0;	
+            } 
+            else{
+            	sim /= (tot);
+            }
             ofp<<sim<<endl;
             if(sim>=0.6){
                 ofp1<<i+1<<" : "<<j+1<<" --- ";
