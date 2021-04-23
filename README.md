@@ -47,10 +47,10 @@ this problem.
 1- Navigate to VisualGenome directory <br/>
    ```cd VisualGenome```<br/>
 2- Download the following files from the dataset: <br/>
-	* image_data.json - https://visualgenome.org/static/data/dataset/image_data.json.zip
-	* object_synsets.json - https://visualgenome.org/static/data/dataset/object_synsets.json.zip
-	* relationship_synsets.json - https://visualgenome.org/static/data/dataset/relationship_synsets.json.zip
-	* scene_graphs.json - https://visualgenome.org/static/data/dataset/scene_graphs.json.zip
+	* image_data.json - https://visualgenome.org/static/data/dataset/image_data.json.zip<br/>
+	* object_synsets.json - https://visualgenome.org/static/data/dataset/object_synsets.json.zip<br/>
+	* relationship_synsets.json - https://visualgenome.org/static/data/dataset/relationship_synsets.json.zip<br/>
+	* scene_graphs.json - https://visualgenome.org/static/data/dataset/scene_graphs.json.zip<br/>
    Extract the downloaded files and copy them to the Dataset folder.<br/>
 3- Navigate to the run folder.<br/>
    ```cd run```<br/>
