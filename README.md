@@ -14,18 +14,17 @@ we propose to use graph similarity metrics on scene graphs as a solution to
 this problem.
 
 ## Install the following in order to run the code:
-
-	* JsonCpp - for parsing json files. <br/>
-	  ```sudo apt-get install libjsoncpp-dev```<br/>
-	* OpenCV for c++ - for parsing images from mapillary vistas dataset to scene graphs<br/>
-	  Follow the instructions from http://www.codebind.com/cpp-tutorial/install-opencv-ubuntu-cpp/<br/>
+   * JsonCpp - for parsing json files. <br/>
+     ```sudo apt-get install libjsoncpp-dev```<br/>
+   * OpenCV for c++ - for parsing images from mapillary vistas dataset to scene graphs<br/>
+     Follow the instructions from http://www.codebind.com/cpp-tutorial/install-opencv-ubuntu-cpp/<br/>
 
 
 ## Steps to run the code
 
 # Mapillary Vistas Dataset
 1- Navigate to Mapillary directory <br/>
-   ```cd Mapillary```
+   ```cd Mapillary```<br/>
 2- Download the Mapillary Vistas Dataset v1.2 from https://www.mapillary.com/dataset/vistas?.<br/>Extract the dataset and copy the training folder to the Dataset sub-folder in Mapillary folder.<br/>
 3- Navigate to the run folder.<br/>
    ```cd run```<br/>
