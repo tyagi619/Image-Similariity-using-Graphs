@@ -45,7 +45,7 @@ this problem.
 
 # Visual Genome Dataset
 1- Navigate to VisualGenome directory <br/>
-   ```cd VisualGenome```
+   ```cd VisualGenome```<br/>
 2- Download the following files from the dataset: <br/>
 	* image_data.json - https://visualgenome.org/static/data/dataset/image_data.json.zip
 	* object_synsets.json - https://visualgenome.org/static/data/dataset/object_synsets.json.zip
