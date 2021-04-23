@@ -60,7 +60,7 @@ this problem.
    ```./genGraph.sh```<br/>
 6- Run the VEO algorithm<br/>
    ```./run.sh```<br/>
-   The script will prompt the number of parallel processes to run as input.
+   The script will prompt the number of parallel processes to run as input.<br/>
    The script will ask if you need to run simple VEO or VEO with partial matching.<br/>
    In case of VEO with partial matching, the script furthur ask to choose between greedy and hungarian algorithm<br/>
 7- Compile the results of VEO algorithm<br/>
