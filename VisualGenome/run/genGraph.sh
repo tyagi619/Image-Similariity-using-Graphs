@@ -51,20 +51,27 @@ echo ------------------------------------
 echo ------------------------------------
 
 echo Calculating cosine similarity between vertex labels....
-echo 'Part (0/3) complete'
+echo 'Part (0/4) complete'
 g++ ../Extras/idToObject.cpp
 ./a.out
 rm a.out
-echo 'Part (1/3) complete'
+echo 'Part (1/4) complete'
 g++ ../Extras/labelToId.cpp
 ./a.out
 rm a.out
-echo 'Part (2/3) complete'
+echo 'Part (2/4) complete'
 g++ ../Extras/label_objects.cpp
 ./a.out
 rm a.out
+echo 'Part (3/4) complete'
+g++ ../Extras/label_edges.cpp
+./a.out
+rm a.out
+g++ ../Extras/node_vec.cpp
+./a.out
+rm a.out
 rm ../Extras/*.txt
-echo 'Part (3/3) complete'
+echo 'Part (4/4) complete'
 
 echo ------------------------------------
 echo ------------------------------------

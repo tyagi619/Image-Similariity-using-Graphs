@@ -340,7 +340,7 @@
         deathnote();
         int threadId = 0;
         if(argc < 2){
-        	cout<<"Insufficient Number of arguments !!!";
+        	cout<<"Insufficient Number of arguments !!!\n";
         	return 0;
         }
 

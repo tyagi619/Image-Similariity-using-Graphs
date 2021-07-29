@@ -21,5 +21,24 @@ int main(){
 	}
 	input.close();
 	output.close();
+
+	input.open("../Labels/edge_labels.json");
+	output.open("../Extras/label_edges.txt");
+	while(input>>noskipws>>c){
+		if(c!='"') continue;
+		string word;
+		while(input>>noskipws>>c){
+			if(c=='"') break;
+			if(c=='_') c=' ';
+			word += c;
+		}
+		word = word.substr(0,word.find('.'));
+		int labelId;
+		input>>skipws>>c>>labelId;
+		output<<labelId<<":"<<word<<","<<endl;
+	}
+	input.close();
+	output.close();
+
 	return 0;
 }

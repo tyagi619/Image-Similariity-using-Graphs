@@ -90,6 +90,9 @@
 				continue;
 			}
 			string synset = edges[i]["synsets"][0].asString();
+			if(edgeLabel[synset].asInt64() == 0){
+				continue;
+			}
 			outputGraph<<"e "<<mp[node1]-1<<" "<<mp[node2]-1<<" "<<edgeLabel[synset].asInt64()<<endl;
 		}
 
